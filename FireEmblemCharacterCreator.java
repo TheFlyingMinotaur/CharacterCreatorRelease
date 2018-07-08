@@ -101,6 +101,7 @@ public class FireEmblemCharacterCreator extends JFrame implements ChangeListener
 		String rawPath = FireEmblemCharacterCreator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 		String path = URLDecoder.decode(rawPath, "UTF-8");
 		path = path.substring(0, path.lastIndexOf("/") + 1);
+		path = path.replaceAll("%20", " ");
 		
 		folder = new File(path + "resources");
 		listOfFiles  = folder.listFiles();
@@ -934,6 +935,7 @@ public class FireEmblemCharacterCreator extends JFrame implements ChangeListener
 			String rawPath = FireEmblemCharacterCreator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			String path = URLDecoder.decode(rawPath, "UTF-8");
 			path = path.substring(0, path.lastIndexOf("/") + 1);
+			path = path.replaceAll("%20", " ");
 			
 			JComboBox<String> src = (JComboBox<String>)event.getSource();
 			String fileName = (String)src.getSelectedItem();
@@ -984,18 +986,22 @@ public class FireEmblemCharacterCreator extends JFrame implements ChangeListener
 	}
 	
 	public void actionPerformed(ActionEvent event){
-
-		String path = FireEmblemCharacterCreator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-		path = path.substring(0, path.lastIndexOf("/") + 1);
-		File portraitOutputFile = new File(path + "output.png");
-		try{		
-			ImageIO.write(portrait, "PNG", portraitOutputFile);
-			}
-		catch(IOException e){};
 		
-		File tokenOutputFile = new File(path + "outputToken.png");
-		try{		
-			ImageIO.write(token, "PNG", tokenOutputFile);
+		try{	
+
+			String rawPath = FireEmblemCharacterCreator.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			String path = URLDecoder.decode(rawPath, "UTF-8");
+			path = path.substring(0, path.lastIndexOf("/") + 1);
+			path = path.replaceAll("%20", " ");
+			File portraitOutputFile = new File(path + "output.png");
+			try{		
+				ImageIO.write(portrait, "PNG", portraitOutputFile);
+				}
+			catch(IOException e){};
+			
+			File tokenOutputFile = new File(path + "outputToken.png");
+		
+				ImageIO.write(token, "PNG", tokenOutputFile);
 			}
 		catch(IOException e){};
 
